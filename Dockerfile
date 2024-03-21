@@ -22,7 +22,10 @@ RUN apk add --no-cache \
 
 RUN python3 -m pip config set global.break-system-packages true
 
-RUN python3 -m pip install ansible ansible-lint
+RUN python3 -m pip install \
+    ansible \
+    ansible-lint \
+    ;
 
 WORKDIR /
 
