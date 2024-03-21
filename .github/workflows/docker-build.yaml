@@ -13,8 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: |
-        source docker-settings.conf
-        docker build . --file Dockerfile --tag "$APP":"$TAG"
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Build the Docker image
+        run: |
+          source docker-settings.conf
+          docker build . --file Dockerfile --tag "$APP":"$TAG"
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v5
+        with:
+          name: pr1v/ansible-lint
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: whatever
