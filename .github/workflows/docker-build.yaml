@@ -19,7 +19,10 @@ jobs:
       - name: Build the Docker image
         run: |
           source docker-settings.conf
-          docker build . --tag "$APP":"$TAG"
+          docker build . \
+            --tag "$APP":"$TAG" \
+            --tag "$APP":latest \
+            ;
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
