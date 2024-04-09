@@ -24,9 +24,15 @@ jobs:
             --tag "$APP":latest \
             ;
 
+      - name: Get the release version
+        id: pre-step
+        shell: bash
+        run: echo "release-version=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: pr1v/ansible-lint
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: "latest,${{ steps.pre-step.outputs.release-version }}"
