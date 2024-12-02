@@ -7,9 +7,8 @@ source docker-settings.conf
 echo "Running"
 
 opts=(
-    -i
-    -t
-#    -v /sys/fs/cgroup:/sys/fs/cgroup:ro
+    --interactive=true
+    --tty=true
     "$APP"
     /bin/bash
 )
